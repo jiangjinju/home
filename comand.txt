@@ -1,0 +1,13 @@
+git clone https://github.com/jiangjinju/jiangjinju.github.io
+git status
+git add 需要提交的文件  例如：git add index.html
+git commit -m "本次提交内容描述"
+git push  提交
+git pull 更新
+
+
+用户名:jiangjinju
+密码: 我家妞电话号码+姓拼音
+
+
+主页访问地址:https://jiangjinju.github.io/
