@@ -38,9 +38,74 @@
 
 </style>
 <link rel="stylesheet" type="text/css" href="./css/standard-css-ski-ltr-ltr.css" />
-<title>Jiangjinju</title>
+<title>map</title>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefZle2DqxF9i51PTfoZsZoOmvWzKYhF4&sensor=true"></script>
+<script type="text/javascript" src="map/js/d3.min.js" charset="utf-8"></script>
 </head>
 <body xmlns="http://www.google.com/ns/jotspot" id="body" class=" en            ">
+
+<script type="text/javascript">
+var doc = document,
+    showDiv = doc.getElementById('show');
+function lodeSupport(){
+    if(navigator.geolocation){
+        showDiv.style.display = 'block';
+		intMap();
+    }else{
+        support.innerHTML = '对不起，浏览器不支持！';
+        showDiv.style.display = 'none';
+    }
+}
+
+function intMap()
+{
+	var redIcon = "map/icon/red.png";
+	var blueIcon = "map/icon/blue.png";
+	var center = new google.maps.LatLng(40.7143528,-74.0059731);
+	var mapOptions = {
+	  center: center,
+	  zoom: 3,
+	  mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	var map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
+	d3.csv("map/data/userdataexport13.csv",function(error,csvdata)
+	{
+		for( var i = 0; i< csvdata.length; i++ )
+		{ 
+			var lat = csvdata[i]["geocode.location.lat"]; 
+			var lng = csvdata[i]["geocode.location.lng"]; 
+			var username = csvdata[i]["user_name"];
+			//console.log( "lat: " + lat + "\n" + "lng: " + lng + "\n" + "username: " + username );
+			var position = new google.maps.LatLng(lat, lng);
+			var marker = new google.maps.Marker({
+				icon: blueIcon,
+				position: position,
+				map: map,
+				title:username
+			});
+		}
+	});
+	
+	d3.csv("map/data/userdataexport14.csv",function(error,csvdata)
+	{
+		for( var i = 0; i< csvdata.length; i++ )
+		{ 
+			var lat = csvdata[i]["geocode.location.lat"]; 
+			var lng = csvdata[i]["geocode.location.lng"]; 
+			var username = csvdata[i]["user_name"];
+			var position = new google.maps.LatLng(lat, lng);
+			var marker = new google.maps.Marker({
+				icon: redIcon,
+				position: position,
+				map: map,
+				title:username
+			});
+		}
+	});
+} 
+  
+window.addEventListener('load', lodeSupport , true);
+</script>
 
 <div id="sites-chrome-everything-scrollbar">
 <div id="sites-chrome-everything" class="">
@@ -73,27 +138,7 @@
 
 
 <div id="sites-chrome-main-wrapper">
-	<div id="sites-chrome-main-wrapper-inside">
-		<table id="sites-chrome-main" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
-			<td id="sites-chrome-sidebar-left" class="sites-layout-sidebar-left initial" style="width:180px">
-				<a href="https://jiangjinju.github.io/asset/1.jpg">
-					<img alt="jiangjingju" border="0" src="./asset/1.jpg" width="100%" />
-				</a>	
-			</td>
-			<td id="sites-canvas-wrapper">
-				<br />
-				<table xmlns="http://www.w3.org/1999/xhtml" cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox">
-					<tr>
-						<td class="sites-layout-tile sites-tile-name-content-1">
-							<div><span style="background-color:transparent">say experience</span></div>
-							<div><span style="background-color:transparent">working experience: Esselte</span></div>
-							<br />
-							<div><span style="background-color:transparent">say experience</span></div>
-						</td> 
-					</tr>
-				</table>
-			</td>
-		</table>
+	<div id="map_canvas" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
 	</div> 
 </div>
 
