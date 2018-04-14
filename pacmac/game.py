@@ -669,14 +669,14 @@ class Game:
                             self.unmute()
                             return
 
-                    self.totalAgentTimes[agentIndex] += move_time
+                    #self.totalAgentTimes[agentIndex] += move_time
                     #print "Agent: %d, time: %f, total: %f" % (agentIndex, move_time, self.totalAgentTimes[agentIndex])
-                    if self.totalAgentTimes[agentIndex] > self.rules.getMaxTotalTime(agentIndex):
-                        print("Agent %d ran out of time! (time: %1.2f)" % (agentIndex, self.totalAgentTimes[agentIndex]), file=sys.stderr)
-                        self.agentTimeout = True
-                        self._agentCrash(agentIndex, quiet=True)
-                        self.unmute()
-                        return
+                    #if self.totalAgentTimes[agentIndex] > self.rules.getMaxTotalTime(agentIndex):
+                        #print("Agent %d ran out of time! (time: %1.2f)" % (agentIndex, self.totalAgentTimes[agentIndex]), file=sys.stderr)
+                        #self.agentTimeout = True
+                        #self._agentCrash(agentIndex, quiet=True)
+                        #self.unmute()
+                        #return
                     self.unmute()
                 except Exception as data:
                     self._agentCrash(agentIndex)

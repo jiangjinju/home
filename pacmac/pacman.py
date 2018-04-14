@@ -269,7 +269,7 @@ class ClassicGameRules:
     These game rules manage the control flow of a game, deciding when
     and how the game starts and ends.
     """
-    def __init__(self, timeout=30):
+    def __init__(self, timeout=1):
         self.timeout = timeout
 
     def newGame( self, layout, pacmanAgent, ghostAgents, display, quiet = False, catchExceptions=False):
@@ -523,7 +523,7 @@ def readCommand( argv ):
     parser.add_option('-c', '--catchExceptions', action='store_true', dest='catchExceptions',
                       help='Turns on exception handling and timeouts during games', default=False)
     parser.add_option('--timeout', dest='timeout', type='int',
-                      help=default('Maximum length of time an agent can spend computing in a single game'), default=30)
+                      help=default('Maximum length of time an agent can spend computing in a single move'), default=1)
 
     options, otherjunk = parser.parse_args(argv)
     if len(otherjunk) != 0:
@@ -626,7 +626,7 @@ def replayGame( layout, actions, display ):
 
     display.finish()
 
-def runGames( layout, pacman, ghosts, display, numGames, record, numTraining = 0, catchExceptions=False, timeout=30 ):
+def runGames( layout, pacman, ghosts, display, numGames, record, numTraining = 0, catchExceptions=False, timeout=1 ):
     import __main__
     __main__.__dict__['_display'] = display
 
