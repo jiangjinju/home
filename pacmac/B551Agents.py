@@ -87,7 +87,7 @@ class B551Agent(Agent):
         for cap in newCapsules:
           disCapsule.append(50.0/manhattanDistance(newPos, cap))
         if len(disCapsule)>0:
-          score +=max(disFood)
+          score +=max(disCapsule)
 		  
 		  
 
