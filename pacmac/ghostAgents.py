@@ -75,7 +75,9 @@ class DirectionalGhost( GhostAgent ):
 
         # Construct distribution
         dist = util.Counter()
+        #print(dist)
         for a in bestActions: dist[a] = bestProb / len(bestActions)
         for a in legalActions: dist[a] += ( 1-bestProb ) / len(legalActions)
         dist.normalize()
+        #print(dist)
         return dist
